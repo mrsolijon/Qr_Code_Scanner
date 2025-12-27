@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "895870359266",
+    "project_id": "qr-code-scanner-d2572",
+    "storage_bucket": "qr-code-scanner-d2572.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895870359266:android:6a82d85229624c31f770bb",
+        "android_client_info": {
+          "package_name": "uz.sogurumu.qrcodescanner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjaTZoyWRIe1sp11qXyNgBghmBdF_MPJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

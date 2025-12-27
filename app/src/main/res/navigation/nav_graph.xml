@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/cameraFragment">
+
+    <fragment
+        android:id="@+id/cameraFragment"
+        android:name="uz.sogurumu.qrcodescanner.ui.camera.CameraFragment"
+        android:label="fragment_camera"
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/action_cameraFragment_to_scanResultFragment"
+            app:destination="@id/scanResultFragment" />
+        <action
+            android:id="@+id/action_cameraFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/scanResultFragment"
+        android:name="uz.sogurumu.qrcodescanner.ui.scan.ScanResultFragment"
+        android:label="fragment_scan_result"
+        tools:layout="@layout/fragment_scan_result">
+        <argument
+            android:name="scan_result"
+            app:argType="string" />
+    </dialog>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="uz.sogurumu.qrcodescanner.ui.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_cameraFragment"
+            app:destination="@id/cameraFragment"
+            app:popUpTo="@id/cameraFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
+</navigation>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="background_main">#121212</color>
+    <color name="background_dark">#212121</color>
+    <color name="item_background">#1E1E1E</color>
+    <color name="item_selected_bg">#E3F2FD</color>
+    <color name="card_bg">#252525</color>
+    <color name="overlay_dark">#80000000</color>
+    <color name="glass_bg">#33FFFFFF</color>
+    <color name="glass_stroke">#50FFFFFF</color>
+    <color name="purple_vivid">#D500F9</color>
+    <color name="purple_vivid_transparent">#00D500F9</color>
+    <color name="purple_deep">#651FFF</color>
+    <color name="purple_light">#E1BEE7</color>
+    <color name="purple_accent">#C7B0F7</color>
+
+    <color name="text_hint">#B0B0B0</color>
+    <color name="text_light">#E0E0E0</color>
+    <color name="text_secondary">#BDBDBD</color>
+    <color name="text_gray">#888888</color>
+    <color name="icon_tint_grey">#757575</color>
+
+    <color name="color_error">#FF5252</color>
+    <color name="color_success">#4CAF50</color>
+    <color name="badge_green_bg">#2E3B33</color>
+    <color name="badge_green_text">#4CAF50</color>
+    <color name="badge_blue_bg">#2A303C</color>
+    <color name="badge_blue_text">#448AFF</color>
+    <color name="badge_orange_bg">#3E3228</color>
+    <color name="badge_orange_text">#FF9800</color>
+
+    <color name="bottom_nav_background">#1A1A1A</color>
+    <color name="bottom_nav_selected_bg">#3D3D3D</color>
+</resources>
