@@ -8,15 +8,11 @@ import uz.sogurumu.qrcodescanner.data.AppDatabase
 import uz.sogurumu.qrcodescanner.ui.history.HistoryViewModel
 
 val appModule = module {
-    single {
-        Room.databaseBuilder(
-            androidContext(),
-            AppDatabase::class.java,
-            "scan_results_db"
-        ).build()
-    }
+  single {
+    Room.databaseBuilder(androidContext(), AppDatabase::class.java, "scan_results_db").build()
+  }
 
-    single { get<AppDatabase>().scanResultDao() }
+  single { get<AppDatabase>().scanResultDao() }
 
-    viewModel { HistoryViewModel(get()) }
+  viewModel { HistoryViewModel(get()) }
 }

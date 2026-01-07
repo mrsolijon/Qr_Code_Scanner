@@ -5,5 +5,5 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [ScanResult::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun scanResultDao(): ScanResultDao
+  abstract fun scanResultDao(): ScanResultDao
 }

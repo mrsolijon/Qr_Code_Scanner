@@ -7,14 +7,14 @@ import org.koin.core.context.startKoin
 import uz.sogurumu.qrcodescanner.di.appModule
 
 class QrCodeScannerApp : Application() {
-    override fun onCreate() {
-        super.onCreate()
+  override fun onCreate() {
+    super.onCreate()
 
-        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
+    FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true)
 
-        startKoin {
-            androidContext(this@QrCodeScannerApp)
-            modules(appModule)
-        }
+    startKoin {
+      androidContext(this@QrCodeScannerApp)
+      modules(appModule)
     }
+  }
 }

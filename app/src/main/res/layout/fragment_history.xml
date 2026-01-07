@@ -17,9 +17,9 @@
         android:contentDescription="Close"
         android:padding="12dp"
         android:src="@drawable/ic_close"
-        app:tint="@color/icon_tint_grey"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/icon_tint_grey" />
 
     <ImageButton
         android:id="@+id/btnSelectAll"
@@ -30,10 +30,10 @@
         android:padding="12dp"
         android:src="@drawable/ic_select_all"
         android:visibility="gone"
-        app:tint="@color/icon_tint_grey"
         app:layout_constraintBottom_toBottomOf="@+id/ivClose"
         app:layout_constraintEnd_toStartOf="@+id/ivClose"
         app:layout_constraintTop_toTopOf="@+id/ivClose"
+        app:tint="@color/icon_tint_grey"
         tools:visibility="visible" />
 
     <ImageButton
@@ -45,11 +45,12 @@
         android:padding="12dp"
         android:src="@drawable/ic_delete"
         android:visibility="gone"
-        app:tint="@color/color_error"
         app:layout_constraintBottom_toBottomOf="@+id/ivClose"
         app:layout_constraintEnd_toStartOf="@+id/btnSelectAll"
         app:layout_constraintTop_toTopOf="@+id/ivClose"
+        app:tint="@color/color_error"
         tools:visibility="visible" />
+
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="0dp"

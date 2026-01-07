@@ -16,129 +16,127 @@ import uz.sogurumu.qrcodescanner.R
 import uz.sogurumu.qrcodescanner.databinding.FragmentHistoryBinding
 
 class HistoryFragment : Fragment() {
-    private var _binding: FragmentHistoryBinding? = null
-    private val binding get() = _binding!!
+  private var _binding: FragmentHistoryBinding? = null
+  private val binding
+    get() = _binding!!
 
-    private val historyViewModel: HistoryViewModel by viewModel()
-    private lateinit var historyAdapter: HistoryAdapter
+  private val historyViewModel: HistoryViewModel by viewModel()
+  private lateinit var historyAdapter: HistoryAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHistoryBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+  override fun onCreateView(
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?,
+  ): View {
+    _binding = FragmentHistoryBinding.inflate(inflater, container, false)
+    return binding.root
+  }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
 
-        setupAdapter()
-        setupClickListeners()
-        observeData()
-    }
+    setupAdapter()
+    setupClickListeners()
+    observeData()
+  }
 
-    private fun setupAdapter() {
-        historyAdapter = HistoryAdapter(
+  private fun setupAdapter() {
+    historyAdapter =
+        HistoryAdapter(
             onItemClick = { scanResult ->
-                if (!historyAdapter.isSelectionMode) {
-                    historyAdapter.isSelectionMode = true
-                    historyAdapter.toggleSelection(scanResult.id)
-                    updateButtonsState()
-                }
-            },
-            onDelete = { scanResult ->
-                historyViewModel.delete(scanResult)
-            }
-        )
-
-        historyAdapter.onItemClickSimple = { scanResult ->
-            if (historyAdapter.isSelectionMode) {
+              if (!historyAdapter.isSelectionMode) {
+                historyAdapter.isSelectionMode = true
                 historyAdapter.toggleSelection(scanResult.id)
                 updateButtonsState()
-            } else {
-                val data = scanResult.data
-                try {
-                    var uri = Uri.parse(data)
-                    if (!data.startsWith("http://") && !data.startsWith("https://") &&
-                        (data.contains("www.") || data.contains(".com") || data.contains(".uz"))
-                    ) {
-                        uri = Uri.parse("https://$data")
-                    }
-                    val intent = Intent(Intent.ACTION_VIEW, uri)
-                    startActivity(intent)
-                } catch (e: Exception) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Link hadn't opened or text",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
+              }
+            },
+            onDelete = { scanResult -> historyViewModel.delete(scanResult) },
+        )
 
-        binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(requireContext())
-            adapter = historyAdapter
+    historyAdapter.onItemClickSimple = { scanResult ->
+      if (historyAdapter.isSelectionMode) {
+        historyAdapter.toggleSelection(scanResult.id)
+        updateButtonsState()
+      } else {
+        val data = scanResult.data
+        try {
+          var uri = Uri.parse(data)
+          if (
+              !data.startsWith("http://") &&
+                  !data.startsWith("https://") &&
+                  (data.contains("www.") || data.contains(".com") || data.contains(".uz"))
+          ) {
+            uri = Uri.parse("https://$data")
+          }
+          val intent = Intent(Intent.ACTION_VIEW, uri)
+          startActivity(intent)
+        } catch (e: Exception) {
+          Toast.makeText(requireContext(), "Link hadn't opened or text", Toast.LENGTH_SHORT).show()
         }
+      }
     }
 
-    private fun setupClickListeners() {
-        binding.ivClose.setOnClickListener {
-            if (historyAdapter.isSelectionMode) {
-                historyAdapter.clearSelection()
-                updateButtonsState()
-            } else {
-                findNavController().popBackStack()
-            }
-        }
+    binding.recyclerView.apply {
+      layoutManager = LinearLayoutManager(requireContext())
+      adapter = historyAdapter
+    }
+  }
 
-        binding.btnSelectAll.setOnClickListener {
-            historyAdapter.toggleSelectAll()
-
-            updateButtonsState()
-        }
-
-        binding.btnDeleteSelected.setOnClickListener {
-            val selectedIds = historyAdapter.getSelectedItems()
-            if (selectedIds.isNotEmpty()) {
-                historyViewModel.deleteSelected(selectedIds)
-                historyAdapter.clearSelection()
-                updateButtonsState()
-            }
-        }
+  private fun setupClickListeners() {
+    binding.ivClose.setOnClickListener {
+      if (historyAdapter.isSelectionMode) {
+        historyAdapter.clearSelection()
+        updateButtonsState()
+      } else {
+        findNavController().popBackStack()
+      }
     }
 
-    private fun observeData() {
-        historyViewModel.allScanResults.observe(viewLifecycleOwner) { list ->
-            historyAdapter.submitList(list)
+    binding.btnSelectAll.setOnClickListener {
+      historyAdapter.toggleSelectAll()
 
-            if (list.isEmpty() && historyAdapter.isSelectionMode) {
-                historyAdapter.clearSelection()
-                updateButtonsState()
-            }
-        }
+      updateButtonsState()
     }
 
-    private fun updateButtonsState() {
-        val isSelectionMode = historyAdapter.isSelectionMode
-        val selectedCount = historyAdapter.getSelectedItems().size
-
-        binding.btnDeleteSelected.isVisible = isSelectionMode
-        binding.btnSelectAll.isVisible = isSelectionMode
-
-        if (isSelectionMode) {
-            binding.tvTitle.text =
-                if (selectedCount == 0) "Select Items" else "$selectedCount Selected"
-            binding.ivClose.setImageResource(R.drawable.ic_close)
-        } else {
-            binding.tvTitle.text = "History"
-            binding.ivClose.setImageResource(R.drawable.ic_close)
-        }
+    binding.btnDeleteSelected.setOnClickListener {
+      val selectedIds = historyAdapter.getSelectedItems()
+      if (selectedIds.isNotEmpty()) {
+        historyViewModel.deleteSelected(selectedIds)
+        historyAdapter.clearSelection()
+        updateButtonsState()
+      }
     }
+  }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+  private fun observeData() {
+    historyViewModel.allScanResults.observe(viewLifecycleOwner) { list ->
+      historyAdapter.submitList(list)
+
+      if (list.isEmpty() && historyAdapter.isSelectionMode) {
+        historyAdapter.clearSelection()
+        updateButtonsState()
+      }
     }
+  }
+
+  private fun updateButtonsState() {
+    val isSelectionMode = historyAdapter.isSelectionMode
+    val selectedCount = historyAdapter.getSelectedItems().size
+
+    binding.btnDeleteSelected.isVisible = isSelectionMode
+    binding.btnSelectAll.isVisible = isSelectionMode
+
+    if (isSelectionMode) {
+      binding.tvTitle.text = if (selectedCount == 0) "Select Items" else "$selectedCount Selected"
+      binding.ivClose.setImageResource(R.drawable.ic_close)
+    } else {
+      binding.tvTitle.text = "History"
+      binding.ivClose.setImageResource(R.drawable.ic_close)
+    }
+  }
+
+  override fun onDestroyView() {
+    super.onDestroyView()
+    _binding = null
+  }
 }

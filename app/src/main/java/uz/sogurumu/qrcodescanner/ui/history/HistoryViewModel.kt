@@ -9,28 +9,32 @@ import uz.sogurumu.qrcodescanner.data.ScanResultDao
 
 class HistoryViewModel(private val scanResultDao: ScanResultDao) : ViewModel() {
 
-    val allScanResults = scanResultDao.getAll()
+  val allScanResults = scanResultDao.getAll()
 
-    fun insert(scanResult: ScanResult) = viewModelScope.launch {
+  fun insert(scanResult: ScanResult) =
+      viewModelScope.launch {
         try {
-            scanResultDao.insert(scanResult)
+          scanResultDao.insert(scanResult)
         } catch (e: Exception) {
-            FirebaseCrashlytics.getInstance().recordException(e)
+          FirebaseCrashlytics.getInstance().recordException(e)
         }
-    }
+      }
 
-    fun delete(scanResult: ScanResult) = viewModelScope.launch {
+  fun delete(scanResult: ScanResult) =
+      viewModelScope.launch {
         try {
-            scanResultDao.delete(scanResult.id)
+          scanResultDao.delete(scanResult.id)
         } catch (e: Exception) {
-            FirebaseCrashlytics.getInstance().recordException(e)
+          FirebaseCrashlytics.getInstance().recordException(e)
         }
-    }
-    fun deleteSelected(selectedIds: List<Int>) = viewModelScope.launch {
+      }
+
+  fun deleteSelected(selectedIds: List<Int>) =
+      viewModelScope.launch {
         try {
-            scanResultDao.deleteByIds(selectedIds)
+          scanResultDao.deleteByIds(selectedIds)
         } catch (e: Exception) {
-            FirebaseCrashlytics.getInstance().recordException(e)
+          FirebaseCrashlytics.getInstance().recordException(e)
         }
-    }
+      }
 }

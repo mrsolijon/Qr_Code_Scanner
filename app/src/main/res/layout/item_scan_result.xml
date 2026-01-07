@@ -37,19 +37,20 @@
         android:padding="8dp"
         android:src="@drawable/ic_check"
         android:visibility="gone"
-        app:tint="@color/color_success"
         app:layout_constraintBottom_toBottomOf="@+id/iconQr"
         app:layout_constraintEnd_toEndOf="@+id/iconQr"
         app:layout_constraintStart_toStartOf="@+id/iconQr"
         app:layout_constraintTop_toTopOf="@+id/iconQr"
+        app:tint="@color/color_success"
         tools:visibility="visible" />
+
     <TextView
         android:id="@+id/dataTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:ellipsize="end"
         android:maxLines="1"
         android:text="https://example.com/qr-code"
@@ -82,9 +83,9 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="8dp"
         android:src="@drawable/ic_delete"
-        app:tint="@color/color_error"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/cardBackground"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/color_error" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
